@@ -90,7 +90,7 @@ def prompt_user(evaluate):
         if response in [0, 1, evaluate]:
             print("These are invalid answers, try again.")
             continue
-        elif response == 2:
+        elif response % 2 == 0:
             print("Please warn the player this is a horrendous idea.")
 
         print("The chosen factor is " + str(response) + ". Is this correct? Y/n")
