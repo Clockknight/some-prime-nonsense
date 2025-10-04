@@ -4,8 +4,9 @@ import pseudoprimes
 from functools import reduce
 from math import sqrt
 import sys
+import timeit
 
-BASE_POWER = 50
+BASE_POWER = 40
 BASE_LAST_NUMBER = int(2 ** BASE_POWER + 1)
 INDEX_CAP = 100
 
@@ -24,25 +25,40 @@ def generate_true_prime():
 
 def generate_mislead():
     mislead = random.getrandbits(BASE_POWER)
-    if not mislead % 2:
-        mislead += 1
     count = 1
-    while pseudoprimes.is_prime(mislead):
+
+    while True:
         mislead += 2
         count += 1
 
         if not count % 100:
             print("Processing mislead no. " + str(count))
 
-        if prime_check_5(mislead):
+        if all_prime_checks(mislead):
             continue
 
-    return mislead
+        if pseudoprimes.is_prime(mislead):
+            return mislead
 
+def all_prime_checks(number):
+
+    number % 3
+
+
+    timeit.timeit('''    while n > 0:
+        sum += n % 10  # extract last digit
+        n //= 10''', n = number, sum = 0)
+
+
+    if prime_check_5(number):
+        return True
+
+
+
+
+    return False
 
 def prime_check_5(number):
-    if [0, 5].__contains__(int(repr(number)[-1])):
-        return True
 
     return False
 
