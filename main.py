@@ -26,6 +26,7 @@ MINIMUM_NONFACTOR = 31
 
 def generate_composite():
     composite = random.getrandbits(BASE_POWER)
+    composite += 2 ** BASE_POWER
     if not composite % 2:
         composite += 1
     count = 1
